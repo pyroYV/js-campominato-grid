@@ -16,7 +16,26 @@
 
 
 const startGame = document.getElementById('start-game')
+const mineWrapper = document.getElementById('minefield-wrapper')
+
 
 startGame.addEventListener("click", function() {
-    document.getElementById("demo").innerHTML = "Hello World";
+    for (let index = 1; index < 101; index++) {
+        const square = document.createElement('div')
+        square.classList.add('square','difficulty','border')
+        square.innerHTML = `${index}`
+        mineWrapper.append(square)
+        square.addEventListener('click',function(){
+            console.log(`hai cliccato il numero ${index}`)
+            square.classList.toggle('skyblue')
+        })
+        
+    }
   })
+
+
+  function newSquare() {
+        const square = document.createElement('div')
+        square.classList.add('square','difficulty')
+        mineWrapper.append(square)
+  }

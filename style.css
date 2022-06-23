@@ -16,11 +16,31 @@ header{
 }
 
 .square {
-    height: 100px;
-    width: 100px;
+  
+    background-color: greenyellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.difficulty{
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+}
+#minefield-wrapper{
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 504px;
+    height: 504px;
+    background-color: lightcoral;
+
 }
 
-.minefield-wrapper{
-    display: flex;
-    
+.border {
+    border: 2px solid whitesmoke;
+}
+
+.skyblue{
+    background-color: skyblue;
 }

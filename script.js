@@ -21,24 +21,32 @@ const mineWrapper = document.getElementById('minefield-wrapper')
 
 startGame.addEventListener("click", function() {
     mineWrapper.innerHTML= ''
-
-    const difficulty = document.getElementById('dif-select')
-    for (let index = 1; index < 101; index++) {
-        const square = createNewSquare()
-
-        square.classList.add('square','difficulty','border')
+    let difficulty = difSelector()
+    console.log(difficulty)
+    for (let index = 1; index < difficulty; index++) {
+        const square = createNewSquare(difficulty)
         eventToggle(square,'skyblue')
         
         mineWrapper.append(square)
         square.innerHTML = index
+        square.addEventListener('click',function(){
+        console.log(`La casella clickata è la numero: ${index}`);
+        }
+        )
         
     }
   })
 
 
-function createNewSquare() {
+function createNewSquare(difficulty) {
     const square = document.createElement('div')
-    square.classList.add('square','difficulty','border')
+    square.classList.add('square','border')
+    if(difficulty == 101){
+        square.classList.add('easy')
+    } else if (difficulty == 82){
+        square.classList.add('medium')
+    } else{
+        square.classList.add('hard')}
     return square
 }
 
@@ -48,3 +56,16 @@ function eventToggle(element,toggle){
      element.addEventListener('click',function(){
         element.classList.toggle(toggle)
 })}
+
+function difSelector(){
+    let difficultySelector = document.getElementById('dif-select')
+    let difficulty = difficultySelector.value
+    if(difficulty == 1){
+        difficulty = 101
+    } else if (difficulty == 2){
+        difficulty = 82
+    } else{
+        difficulty = 50
+    }
+    return difficulty
+}

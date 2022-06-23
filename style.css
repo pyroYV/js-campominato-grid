@@ -10,7 +10,9 @@ header{
  justify-content: center;
  align-items: center;
 }
-
+main {
+    background-color: tomato;
+}
 #start-game{
     padding: 1rem;
 }

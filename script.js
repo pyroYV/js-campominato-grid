@@ -20,22 +20,31 @@ const mineWrapper = document.getElementById('minefield-wrapper')
 
 
 startGame.addEventListener("click", function() {
+    mineWrapper.innerHTML= ''
+
+    const difficulty = document.getElementById('dif-select')
     for (let index = 1; index < 101; index++) {
-        const square = document.createElement('div')
+        const square = createNewSquare()
+
         square.classList.add('square','difficulty','border')
-        square.innerHTML = `${index}`
+        eventToggle(square,'skyblue')
+        
         mineWrapper.append(square)
-        square.addEventListener('click',function(){
-            console.log(`hai cliccato il numero ${index}`)
-            square.classList.toggle('skyblue')
-        })
+        square.innerHTML = index
         
     }
   })
 
 
-  function newSquare() {
-        const square = document.createElement('div')
-        square.classList.add('square','difficulty')
-        mineWrapper.append(square)
-  }
+function createNewSquare() {
+    const square = document.createElement('div')
+    square.classList.add('square','difficulty','border')
+    return square
+}
+
+    
+    
+function eventToggle(element,toggle){
+     element.addEventListener('click',function(){
+        element.classList.toggle(toggle)
+})}

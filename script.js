@@ -21,6 +21,7 @@ const mineWrapper = document.getElementById('minefield-wrapper')
 
 startGame.addEventListener("click", function() {
     mineWrapper.innerHTML= ''
+    let bombList = []
     let difficulty = difSelector()
     console.log(difficulty)
     for (let index = 1; index < difficulty; index++) {
@@ -31,13 +32,16 @@ startGame.addEventListener("click", function() {
         square.innerHTML = index
         square.addEventListener('click',function(){
         console.log(`La casella clickata è la numero: ${index}`);
-        }
-        )
-        
+            if (bombList.includes(index)){
+                square.classList.add('bomb')
+            }
+        })
     }
+    
+    console.log(addNumbertoList(16,bombList,difficulty))
   })
 
-
+// creo un quadrato diverso in base alla difficoltà
 function createNewSquare(difficulty) {
     const square = document.createElement('div')
     square.classList.add('square','border')
@@ -51,12 +55,14 @@ function createNewSquare(difficulty) {
 }
 
     
-    
+//toggle la classe 'function' al click    
 function eventToggle(element,toggle){
      element.addEventListener('click',function(){
         element.classList.toggle(toggle)
 })}
 
+
+// prendo il valore della selezione della difficoltà e stabilisco la variabile difficoltà per le altre funzioni
 function difSelector(){
     let difficultySelector = document.getElementById('dif-select')
     let difficulty = difficultySelector.value
@@ -69,3 +75,29 @@ function difSelector(){
     }
     return difficulty
 }
+
+// creo un numero casuale e unico e lo aggiungo ad un array
+function randomUniqueNumber(bombList,difficulty){
+    let isValidNumber = false
+    
+    while (isValidNumber === false) {
+        //creo un numero casuale da 1 alla difficoltà scelta dall'utente
+        bombNumber = Math.floor(Math.random() * (difficulty+1) - 1) + 1
+        if(!bombList.includes(bombNumber)){
+            isValidNumber = true
+        }
+    }
+    return bombNumber
+}
+
+function addNumbertoList(bombNumber,bombList,difficulty){
+    
+       for (let index = 0; index < bombNumber; index++) {
+            let newBomb = randomUniqueNumber(bombList,difficulty)
+            bombList.push(newBomb)
+            console.log(`${newBomb} di ${index}`)
+            console.log(`${bombList} di ${index}`)
+       }
+    return bombList
+}   
+
